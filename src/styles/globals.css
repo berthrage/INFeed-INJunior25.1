@@ -4,7 +4,7 @@
   }
   
   :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: Inter, sans-serif;
     line-height: 1.5;
     font-weight: 400;
   
@@ -21,7 +21,7 @@
     --gray3: #cccccc;
     --gray4: #dddddd;
 
-    background: linear-gradient(to bottom, var(--blue3), var(--blue2));
+    background: linear-gradient(to bottom, var(--blue3), var(--blue1));
     height: 100%; 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -43,3 +43,13 @@
   ul {
     list-style: none;
   }
+
+  main {
+    display: flex;
+    flex-direction: row;
+    margin-left: 4%;
+    margin-right: 4%;
+    gap: 2%;
+  }
+
+ 
