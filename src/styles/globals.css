@@ -21,13 +21,19 @@
     --gray3: #cccccc;
     --gray4: #dddddd;
 
-    background: linear-gradient(to bottom, var(--blue3), var(--blue1));
+    background: linear-gradient(to bottom, var(--blue3), var(--blue1)) no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
     height: 100%; 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  html, body {
+    min-height: 100%; /* Ensures the gradient extends to at least the full viewport height */
+}
   
   #root {
     margin: 0 auto;
@@ -49,7 +55,15 @@
     flex-direction: row;
     margin-left: 4%;
     margin-right: 4%;
+    padding-top: 20px;
+    padding-bottom: 40px;
     gap: 2%;
   }
+
+  img {
+    transition: 0.5s;
+  }
+
+  
 
  

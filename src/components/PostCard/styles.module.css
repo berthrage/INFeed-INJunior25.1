@@ -1,0 +1,13 @@
+.card {
+    width: 100%;
+    background-color: var(--blue1);
+    height: 500px;
+    border-radius: 20px;
+    opacity: 0;
+    transform: translateY(-150px);
+    transition: 0.8s;
+}
+.card.fadeIn {
+    opacity: 1;
+    transform: translateY(0);
+}
