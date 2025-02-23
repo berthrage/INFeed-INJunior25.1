@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import infeedLogo from "../../assets/icons/infeed-logo.svg"
+import infeedLogo from "../../assets/icons/infeed-logo-fixed.svg"
 
 export default function Header() {
     return (
