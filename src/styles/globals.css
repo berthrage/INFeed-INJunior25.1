@@ -64,7 +64,14 @@
     transition: 0.5s;
   }
 
-  
+@media (max-width: 946px) {
+    main {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+}
+
   
 
  

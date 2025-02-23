@@ -14,7 +14,7 @@
 .topBox {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 15px;
 }
 
 .authorPhotoContainer {
@@ -37,6 +37,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    overflow: hidden;
 }
 
 .commentBox {
@@ -52,6 +53,7 @@
 
 .topSection {
     display: flex;
+    width: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -76,7 +78,13 @@
 
 .contentSection p {
     font-size: 14px;
+    min-width: 0;
+    width: 100%;
     white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: hidden; /* Prevents content from spilling */
+    word-wrap: break-word;
 }
 
 .deleteIcon {

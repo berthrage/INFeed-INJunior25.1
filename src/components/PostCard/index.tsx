@@ -84,7 +84,10 @@ export default function PostCard(props: PostProperties
             <div ref={cardRef} className={`${styles.card} ${isVisible ? styles.fadeIn : ""}`}>
                 <div className={styles.topSection}>
                     <div className={styles.authorInfo}>
-                        <img className={styles.authorPhoto} src={props.authorPhoto}></img>
+                        <div className={styles.authorPhotoContainer}>
+                            <img className={styles.authorPhoto} src={props.authorPhoto}></img>
+                        </div>
+                        
                         <div className={styles.nameRole}>
                             <h1>{props.author}</h1>
                             <p>{props.authorRole}</p>

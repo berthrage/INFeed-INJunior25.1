@@ -28,7 +28,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 12px;
+    gap: 22px;
+}
+
+.authorPhotoContainer {
+    width: 73px;
+    height: 73px;
 }
 
 .authorPhoto {
@@ -37,6 +42,7 @@
     object-fit: cover;
     border-radius: 50%;
     border: 5px solid var(--blue4);
+    box-sizing: border-box;
 }
 .authorPhoto:hover {
     transform: scale(1.2);
@@ -87,4 +93,43 @@
     flex-direction: column;
     height: auto;
     gap: 30px;
+}
+
+@media (max-width: 642px) {
+    .card {
+        width: 100%;
+        padding: 40px 20px 60px 20px;
+    }
+
+    .authorInfo {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .authorPhotoContainer {
+        width: 60px;
+        height: 60px;
+    }
+
+    .authorPhoto {
+        width: 60px;
+        height: 60px;
+    }
+
+    .nameRole h1 {
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .nameRole p {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .timeInfo p {
+        font-weight: 600;
+        font-size: 12px;
+    }
 }
