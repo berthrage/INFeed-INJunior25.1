@@ -8,7 +8,7 @@ import CommentCard from '../CommentCard';
 import { PostProperties } from '../../types/PostProperties';
 
 
-// Remove "cerca de" no display de tempo
+// Removes "cerca de" on the time display
 const customPtBR: Locale = {
     ...ptBR,
     formatDistance: (token: string, count: number, options?: { addSuffix?: boolean }) => {
@@ -26,6 +26,8 @@ export default function PostCard(props: PostProperties
     const [isVisible, setIsVisible] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);
     const [newContent, setNewContent] = useState('');
+    const [timeAgo, setTimeAgo] = useState(() => formatDistanceToNow(parseISO(props.timestamp), { locale: customPtBR }));
+    const postFaded = useRef(false);
 
     const handleDeleteComment = (commentId: string) => {
         props.onDeleteComment(props.id, commentId); 
@@ -50,18 +52,28 @@ export default function PostCard(props: PostProperties
             (entries) => {
                 if (entries[0].isIntersecting) {
                     setIsVisible(true);
+                    postFaded.current = true;
                     observer.disconnect();
                 }
             }, { threshold: 0.3 } // Trigger when 30% of the card is visible
-            );
-    
-            if (cardRef.current) {
-                observer.observe(cardRef.current);
-            }
-    
-            return () => observer.disconnect();
-    
-        }, []);
+        );
+
+        if (cardRef.current) {
+            observer.observe(cardRef.current);
+        }
+
+        return () => observer.disconnect();
+
+    }, []);
+
+    // Update the timeAgo state every 60 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTimeAgo(formatDistanceToNow(parseISO(props.timestamp), { locale: customPtBR }));
+        }, 60000);
+
+        return () => clearInterval(interval);
+    }, [props.timestamp]);
 
 
     return (
@@ -76,7 +88,7 @@ export default function PostCard(props: PostProperties
                         </div>
                     </div>
                     <div className={styles.timeInfo}>
-                        <p>Publicado há {formatDistanceToNow(parseISO(props.timestamp), { locale: customPtBR })}</p>
+                        <p>Publicado há {timeAgo}</p>
                     </div>
                 </div>
 
@@ -112,6 +124,7 @@ export default function PostCard(props: PostProperties
                                 onDelete={handleDeleteComment}
                                 onGiveLike={handleGiveCommentLike}
                                 onUndoLike={handleUndoCommentLike}
+                                postFadedIn={postFaded.current}
                                 >
                             </CommentCard>
                         )}
