@@ -63,6 +63,7 @@
 
 .contentSection p {
     font-size: 14px;
+    white-space: pre-wrap;
 }
 
 .deleteIcon {
