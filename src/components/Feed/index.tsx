@@ -57,8 +57,8 @@ Non quos omnis ut autem labore nam vero consequatur est porro similique ad adipi
                 authorPhoto: jessyPhoto,
                 content: 'Est aspernatur quis eos natus dicta et internos',
                 timestamp: '2024-11-22T12:00:00Z',
-                likes: 6,
-                liked: true,
+                likes: 7,
+                liked: false,
             }]
         }
     ]);
