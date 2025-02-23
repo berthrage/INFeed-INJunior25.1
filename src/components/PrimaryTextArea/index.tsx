@@ -1,15 +1,19 @@
 import styles from "../PrimaryInput/styles.module.css";
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-    children?: React.ReactNode;
     className?: string;
+    inputText: string;
+    setText: (text: string) => void;
 }
 
-export default function PrimaryTextArea(props: TextAreaProps) {
+export default function PrimaryTextArea({ className, inputText, setText, ...rest } : TextAreaProps) {
     return (
         <>
-            <textarea {...props} className={`${styles.input} ${props.className || ""}`}>
-                {props.children}
+            <textarea {...rest} 
+                className={`${styles.input} ${className || ""}`}
+                value={inputText}
+                onChange={(e) => setText(e.target.value)}
+                >
             </textarea>
         </>
     )

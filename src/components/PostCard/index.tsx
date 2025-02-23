@@ -6,8 +6,6 @@ import PrimaryButton from '../PrimaryButton';
 import PrimaryTextArea from '../PrimaryTextArea';
 import CommentCard from '../CommentCard';
 import { PostProperties } from '../../types/PostProperties';
-import { CommentProperties } from '../../types/CommentProperties';
-import felyppePhoto from "../../assets/images/felyppe.jpg"
 
 
 // Remove "cerca de" no display de tempo
@@ -22,10 +20,12 @@ const customPtBR: Locale = {
 export default function PostCard(props: PostProperties 
     & { onDeleteComment: (postId: string, commentId: string) => void }
     & { onGiveCommentLike: (postId: string, commentId: string) => void }
-    & { onUndoCommentLike: (postId: string, commentId: string) => void }) {
+    & { onUndoCommentLike: (postId: string, commentId: string) => void }
+    & { onNewComment: (postId: string, newContent: string, newTimestamp: string) => void}) {
 
     const [isVisible, setIsVisible] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);
+    const [newContent, setNewContent] = useState('');
 
     const handleDeleteComment = (commentId: string) => {
         props.onDeleteComment(props.id, commentId); 
@@ -37,6 +37,10 @@ export default function PostCard(props: PostProperties
 
     function handleUndoCommentLike(commentId: string): void {
         props.onUndoCommentLike(props.id, commentId);
+    }
+
+    function handleNewComment() {
+        props.onNewComment(props.id, newContent, new Date().toISOString());
     }
 
 
@@ -82,8 +86,15 @@ export default function PostCard(props: PostProperties
 
                 <div className={styles.commentInputSection}>
                     <label>Deixe seu feedback</label>
-                    <PrimaryTextArea id={styles.commentTextArea} placeholder='Escreva um comentário...'></PrimaryTextArea>
-                    <PrimaryButton>Comentar</PrimaryButton>
+                    <PrimaryTextArea 
+                        id={styles.commentTextArea} 
+                        placeholder='Escreva um comentário...'
+                        setText={setNewContent}
+                        inputText={newContent}
+                        
+                    ></PrimaryTextArea>
+                    <PrimaryButton
+                        onClick={handleNewComment}>Comentar</PrimaryButton>
                 </div>
 
                 {props.comments.length > 0 && (

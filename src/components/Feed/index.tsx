@@ -1,10 +1,13 @@
 import PostCard from "../PostCard"
 import styles from "./styles.module.css"
+import berthPhoto from "../../assets/images/berth.jpg"
 import thaisPhoto from "../../assets/images/thais.jpg"
 import ricardoPhoto from "../../assets/images/ricardo.jpg"
 import felyppePhoto from "../../assets/images/felyppe.jpg"
 import mellanyPhoto from "../../assets/images/mellany.jpg"
 import { useState } from "react"
+import { CommentProperties } from "../../types/CommentProperties"
+import { PostProperties } from "../../types/PostProperties"
 
 export default function Feed() {
     const [posts, setPosts] = useState([
@@ -70,7 +73,7 @@ Non quos omnis ut autem labore nam vero consequatur est porro similique ad adipi
 
     const handleGiveCommentLike = (postId: string, commentId: string) => {
         setPosts((prevPosts) => {
-            let updatedPosts = [];
+            let updatedPosts: PostProperties[] = [];
 
             for (const post of prevPosts) {
                 if (post.id === postId) {
@@ -96,11 +99,11 @@ Non quos omnis ut autem labore nam vero consequatur est porro similique ad adipi
 
     function handleUndoCommentLike(postId: string, commentId: string): void {
         setPosts((prevPosts) => {
-            let updatedPosts = [];
+            let updatedPosts: PostProperties[] = [];
 
             for (const post of prevPosts) {
                 if (post.id === postId) {
-                    let updatedComments = [];
+                    let updatedComments: CommentProperties[] = [];
 
                     for (const comment of post.comments) {
                         if (comment.id === commentId) {
@@ -112,6 +115,33 @@ Non quos omnis ut autem labore nam vero consequatur est porro similique ad adipi
                     }
                     post.comments = updatedComments;
                 } 
+                
+                updatedPosts.push(post);
+            }
+
+            return updatedPosts;
+        })
+    }
+    
+
+    function handleNewComment(postId: string, newContent: string, newTimestamp: string): void {
+        setPosts((prevPosts) => {
+            let updatedPosts: PostProperties[] = [];
+
+            for (const post of prevPosts) {
+                if (post.id === postId) {
+                    const newComment: CommentProperties = {
+                        id: `${post.comments.length + 1}`, 
+                        author: 'Leandro Berth',
+                        authorPhoto: berthPhoto,
+                        content: newContent,
+                        timestamp: newTimestamp,
+                        likes: 0, 
+                        liked: false,
+                    };
+                    
+                    post.comments.unshift(newComment);
+                }
                 
                 updatedPosts.push(post);
             }
@@ -136,6 +166,7 @@ Non quos omnis ut autem labore nam vero consequatur est porro similique ad adipi
                         onDeleteComment={handleDeleteComment} 
                         onGiveCommentLike={handleGiveCommentLike}
                         onUndoCommentLike={handleUndoCommentLike}
+                        onNewComment={handleNewComment}
                     />
                 ))}
             </div>
