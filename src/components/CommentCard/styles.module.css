@@ -72,9 +72,27 @@
 .likeSection {
     display: flex;
     flex-direction: row;
-    gap: 10px;
-    cursor: pointer;
-    width: 10%;
+    width: auto;
     font-weight: 700;
     font-size: 14px;
+}
+
+.likeClick {
+    display: flex;
+    cursor: pointer;
+    flex-direction: row;
+    gap: 10px;
+    -webkit-user-select: none; 
+    -moz-user-select: none;   
+    -ms-user-select: none;    
+    user-select: none;    
+    white-space: nowrap; 
+}
+
+.likeTextOn {
+    color: var(--blue6);
+}
+
+.likeTextOff {
+    color: white;
 }

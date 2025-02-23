@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./styles.module.css";
 import { formatDistanceToNow, Locale, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -19,11 +19,25 @@ const customPtBR: Locale = {
 };
 
 
-export default function CommentCard(props: CommentProperties & { onDelete: (commentId: string) => void }) {
+export default function CommentCard(props: CommentProperties 
+        & { onDelete: (commentId: string) => void }
+        & { onGiveLike: (commentId: string) => void}
+        & { onUndoLike: (commentId: string) => void}) {
+
     const [isVisible, setIsVisible] = useState(false);
-    const cardRef = useRef<HTMLDivElement>(null);
-    const { counter, incrementCounter } = useCounter(props.likes);
-    
+    const cardRef = useRef<HTMLDivElement>(null);   
+    const [isLiked, setIsLiked] = useState(false);
+
+    function HandleLikes(): void {
+        if (!isLiked) {
+            props.onGiveLike(props.id);
+            setIsLiked(true);
+            return;
+        } 
+        
+        props.onUndoLike(props.id);
+        setIsLiked(false);
+    }
 
     // Observer for Fade-in Effect
     useEffect(() => {
@@ -43,8 +57,6 @@ export default function CommentCard(props: CommentProperties & { onDelete: (comm
         return () => observer.disconnect();
 
     }, []);
-
-    //props.likes = counter;
 
     return (
         <>
@@ -74,8 +86,10 @@ export default function CommentCard(props: CommentProperties & { onDelete: (comm
                         </div>
 
                         <div className={styles.likeSection}>
-                            <img src={likeIcon}></img>
-                            <p>Like • {counter}</p>
+                            <div className={styles.likeClick} onClick={HandleLikes}>
+                                <img src={isLiked? likeLikedIcon : likeIcon}></img>
+                                <p className={isLiked? styles.likeTextOn : styles.likeTextOff}>Like • {props.likes}</p>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,11 @@ export default function Feed() {
             author: 'Thaís Gomes',
             authorRole: 'Designer',
             authorPhoto: thaisPhoto,
-            content: `Lorem ipsum dolor sit amet...`,
+            content: `Lorem ipsum
+
+dolor sit amet. Ex laboriosam dolorem non tempore earum et voluptatem suscipit ut cupiditate nisi est odit voluptates. Nam magni amet ut ipsam molestiae aut facilis minus et quia reiciendis sed excepturi rerum ex consequatur minima! Ex rerum sunt et incidunt officia et veritatis deserunt. Sit soluta laboriosam et incidunt sequi et eius fugiat est temporibus similique rem illum natus sit unde eveniet. 
+
+Non quos omnis ut autem labore nam vero consequatur est porro similique ad adipisci quisquam!`,
             timestamp: "2024-02-22T12:00:00Z",
             comments: [
                 {
@@ -62,6 +66,56 @@ export default function Feed() {
         });
     };
 
+    const handleGiveCommentLike = (postId: string, commentId: string) => {
+        setPosts((prevPosts) => {
+            let updatedPosts = [];
+
+            for (const post of prevPosts) {
+                if (post.id === postId) {
+                    let updatedComments = [];
+
+                    for (const comment of post.comments) {
+                        if (comment.id === commentId) {
+                            comment.likes += 1;
+                        } 
+                        
+                        updatedComments.push(comment);
+                    }
+                    post.comments = updatedComments;
+                } 
+                
+                updatedPosts.push(post);
+            }
+
+            return updatedPosts;
+        })
+    }
+
+    function handleUndoCommentLike(postId: string, commentId: string): void {
+        setPosts((prevPosts) => {
+            let updatedPosts = [];
+
+            for (const post of prevPosts) {
+                if (post.id === postId) {
+                    let updatedComments = [];
+
+                    for (const comment of post.comments) {
+                        if (comment.id === commentId) {
+                            comment.likes -= 1;
+                        } 
+                        
+                        updatedComments.push(comment);
+                    }
+                    post.comments = updatedComments;
+                } 
+                
+                updatedPosts.push(post);
+            }
+
+            return updatedPosts;
+        })
+    }
+
     return (
         <>
             <div className={styles.feed}>
@@ -76,6 +130,8 @@ export default function Feed() {
                         timestamp={post.timestamp}
                         comments={post.comments}
                         onDeleteComment={handleDeleteComment} 
+                        onGiveCommentLike={handleGiveCommentLike}
+                        onUndoCommentLike={handleUndoCommentLike}
                     />
                 ))}
             </div>

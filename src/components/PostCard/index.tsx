@@ -6,7 +6,6 @@ import PrimaryButton from '../PrimaryButton';
 import PrimaryTextArea from '../PrimaryTextArea';
 import CommentCard from '../CommentCard';
 import { PostProperties } from '../../types/PostProperties';
-import { PostCardContext } from "../../stores/PostCardContext"
 
 
 // Remove "cerca de" no display de tempo
@@ -18,15 +17,26 @@ const customPtBR: Locale = {
     },
 };
 
-export default function PostCard(props: PostProperties & { onDeleteComment: (postId: string, commentId: string) => void }) {
+export default function PostCard(props: PostProperties 
+    & { onDeleteComment: (postId: string, commentId: string) => void }
+    & { onGiveCommentLike: (postId: string, commentId: string) => void }
+    & { onUndoCommentLike: (postId: string, commentId: string) => void }) {
+
     const [isVisible, setIsVisible] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);
-    const [comments, setComments] = useState(props.comments);
 
     const handleDeleteComment = (commentId: string) => {
-        setComments((prevComments) => prevComments.filter(comment => comment.id !== commentId));
-        props.onDeleteComment(props.id, commentId); // Notify Feed
+        props.onDeleteComment(props.id, commentId); 
     };
+
+    const handleGiveCommentLike = (commentId: string) => {
+        props.onGiveCommentLike(props.id, commentId);
+    }
+
+    function handleUndoCommentLike(commentId: string): void {
+        props.onUndoCommentLike(props.id, commentId);
+    }
+
 
     // Observer for Fade-in Effect
     useEffect(() => {
@@ -85,7 +95,10 @@ export default function PostCard(props: PostProperties & { onDeleteComment: (pos
                                 content={comment.content}
                                 timestamp={comment.timestamp}
                                 likes={comment.likes}
-                                onDelete={handleDeleteComment}>
+                                onDelete={handleDeleteComment}
+                                onGiveLike={handleGiveCommentLike}
+                                onUndoLike={handleUndoCommentLike}
+                                >
                             </CommentCard>
                         )}
                     </div>
