@@ -26,7 +26,8 @@ Non quos omnis ut autem labore nam vero consequatur est porro similique ad adipi
                     authorPhoto: felyppePhoto,
                     content: 'Est aspernatur quis eos natus dicta et internos',
                     timestamp: '2025-01-22T12:00:00Z',
-                    likes: 7
+                    likes: 7,
+                    liked: false,
                 },
                 {
                     id: '1',
@@ -34,7 +35,8 @@ Non quos omnis ut autem labore nam vero consequatur est porro similique ad adipi
                     authorPhoto: mellanyPhoto,
                     content: 'Est aspernatur quis eos natus dicta et internos',
                     timestamp: '2025-01-22T12:00:00Z',
-                    likes: 6
+                    likes: 6,
+                    liked: true,
                 }
             ]
         },
@@ -77,6 +79,7 @@ Non quos omnis ut autem labore nam vero consequatur est porro similique ad adipi
                     for (const comment of post.comments) {
                         if (comment.id === commentId) {
                             comment.likes += 1;
+                            comment.liked = true;
                         } 
                         
                         updatedComments.push(comment);
@@ -102,6 +105,7 @@ Non quos omnis ut autem labore nam vero consequatur est porro similique ad adipi
                     for (const comment of post.comments) {
                         if (comment.id === commentId) {
                             comment.likes -= 1;
+                            comment.liked = false;
                         } 
                         
                         updatedComments.push(comment);

@@ -5,9 +5,7 @@ import { ptBR } from "date-fns/locale";
 import trashIcon from "../../assets/icons/trash-icon.png";
 import likeIcon from "../../assets/icons/like-icon.png";
 import likeLikedIcon from "../../assets/icons/like-liked-icon.png"
-import useCounter from "../../hooks/useCounter";
 import { CommentProperties } from "../../types/CommentProperties";
-import { PostCardContext } from "../../stores/PostCardContext";
 
 // Substitui "cerca de" por "Cerca de" no display de tempo
 const customPtBR: Locale = {
@@ -26,7 +24,7 @@ export default function CommentCard(props: CommentProperties
 
     const [isVisible, setIsVisible] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);   
-    const [isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(props.liked);
 
     function HandleLikes(): void {
         if (!isLiked) {

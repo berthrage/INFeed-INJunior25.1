@@ -6,6 +6,8 @@ import PrimaryButton from '../PrimaryButton';
 import PrimaryTextArea from '../PrimaryTextArea';
 import CommentCard from '../CommentCard';
 import { PostProperties } from '../../types/PostProperties';
+import { CommentProperties } from '../../types/CommentProperties';
+import felyppePhoto from "../../assets/images/felyppe.jpg"
 
 
 // Remove "cerca de" no display de tempo
@@ -95,6 +97,7 @@ export default function PostCard(props: PostProperties
                                 content={comment.content}
                                 timestamp={comment.timestamp}
                                 likes={comment.likes}
+                                liked={comment.liked}
                                 onDelete={handleDeleteComment}
                                 onGiveLike={handleGiveCommentLike}
                                 onUndoLike={handleUndoCommentLike}
