@@ -20,8 +20,7 @@ const customPtBR: Locale = {
 export default function CommentCard(props: CommentProperties 
         & { onDelete: (commentId: string) => void }
         & { onGiveLike: (commentId: string) => void}
-        & { onUndoLike: (commentId: string) => void}
-        & {postFadedIn: boolean}) {
+        & { onUndoLike: (commentId: string) => void}) {
 
     const [isVisible, setIsVisible] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);   
@@ -43,7 +42,7 @@ export default function CommentCard(props: CommentProperties
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
-                if (entries[0].isIntersecting && props.postFadedIn) {
+                if (entries[0].isIntersecting) {
                     setIsVisible(true);
                     observer.disconnect();
                 }
@@ -69,7 +68,7 @@ export default function CommentCard(props: CommentProperties
 
     return (
         <>
-            <div ref={cardRef} className={`${styles.card}`}>
+            <div ref={cardRef} className={`${styles.card} ${isVisible ? styles.fadeIn : ""}`}>
                 <div className={styles.topBox}>
                     <img className={styles.authorPhoto} src={props.authorPhoto}></img>
                     <div className={styles.commentLikeBox}>

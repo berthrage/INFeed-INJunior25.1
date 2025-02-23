@@ -27,7 +27,6 @@ export default function PostCard(props: PostProperties
     const cardRef = useRef<HTMLDivElement>(null);
     const [newContent, setNewContent] = useState('');
     const [timeAgo, setTimeAgo] = useState(() => formatDistanceToNow(parseISO(props.timestamp), { locale: customPtBR }));
-    const postFaded = useRef(false);
 
     const handleDeleteComment = (commentId: string) => {
         props.onDeleteComment(props.id, commentId); 
@@ -52,10 +51,9 @@ export default function PostCard(props: PostProperties
             (entries) => {
                 if (entries[0].isIntersecting) {
                     setIsVisible(true);
-                    postFaded.current = true;
                     observer.disconnect();
                 }
-            }, { threshold: 0.3 } // Trigger when 30% of the card is visible
+            }, { threshold: 0.2 } // Trigger when 20% of the card is visible
         );
 
         if (cardRef.current) {
@@ -124,7 +122,6 @@ export default function PostCard(props: PostProperties
                                 onDelete={handleDeleteComment}
                                 onGiveLike={handleGiveCommentLike}
                                 onUndoLike={handleUndoCommentLike}
-                                postFadedIn={postFaded.current}
                                 >
                             </CommentCard>
                         )}

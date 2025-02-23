@@ -1,6 +1,14 @@
 .card {
     display: flex;
     flex-direction: column;
+    opacity: 0;
+    transform: translateY(-150px);
+    transition: 0.6s ease-in-out;
+
+}
+.card.fadeIn {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .topBox {

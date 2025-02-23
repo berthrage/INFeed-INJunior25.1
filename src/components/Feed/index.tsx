@@ -5,6 +5,7 @@ import thaisPhoto from "../../assets/images/thais.jpg"
 import ricardoPhoto from "../../assets/images/ricardo.jpg"
 import felyppePhoto from "../../assets/images/felyppe.jpg"
 import mellanyPhoto from "../../assets/images/mellany.jpg"
+import jessyPhoto from "../../assets/images/jessy.jpg"
 import { useState } from "react"
 import { CommentProperties } from "../../types/CommentProperties"
 import { PostProperties } from "../../types/PostProperties"
@@ -50,7 +51,15 @@ Non quos omnis ut autem labore nam vero consequatur est porro similique ad adipi
             authorPhoto: ricardoPhoto,
             content: `Lorem ipsum dolor sit amet...`,
             timestamp: "2025-02-22T12:00:00Z",
-            comments: []
+            comments: [{
+                id: '0',
+                author: 'Jessy Logan',
+                authorPhoto: jessyPhoto,
+                content: 'Est aspernatur quis eos natus dicta et internos',
+                timestamp: '2024-11-22T12:00:00Z',
+                likes: 6,
+                liked: true,
+            }]
         }
     ]);
 
