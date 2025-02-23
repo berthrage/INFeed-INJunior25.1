@@ -5,6 +5,7 @@
 - Armaazenamento via LocalStorage
 - Design Responsivo 
 - Timestamps que se auto-atualizam ('date-fns' como parser)
+- Shortcut com Enter na Textarea (onKeyDown)
 - Estilização idêntica ao conceito do Figma
 - Repleto de Animações 
 
