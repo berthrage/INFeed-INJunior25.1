@@ -40,8 +40,13 @@ export default function PostCard(props: PostProperties
         props.onUndoCommentLike(props.id, commentId);
     }
 
-    function handleNewComment() {
+    function handleNewComment(): void {
         props.onNewComment(props.id, newContent, new Date().toISOString());
+    }
+
+    function addNewComment(): void {
+        handleNewComment();
+        setNewContent('');
     }
 
 
@@ -101,10 +106,15 @@ export default function PostCard(props: PostProperties
                         placeholder='Escreva um comentário...'
                         setText={setNewContent}
                         inputText={newContent}
-                        
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter" && !e.shiftKey) {
+                                e.preventDefault(); // Prevents new line in the textarea
+                                addNewComment();
+                            }
+                        }}    
                     ></PrimaryTextArea>
                     <PrimaryButton
-                        onClick={handleNewComment}>Comentar</PrimaryButton>
+                        onClick={addNewComment}>Comentar</PrimaryButton>
                 </div>
 
                 {props.comments.length > 0 && (

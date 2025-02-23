@@ -70,7 +70,9 @@ export default function CommentCard(props: CommentProperties
         <>
             <div ref={cardRef} className={`${styles.card} ${isVisible ? styles.fadeIn : ""}`}>
                 <div className={styles.topBox}>
-                    <img className={styles.authorPhoto} src={props.authorPhoto}></img>
+                    <div className={styles.authorPhotoContainer}>
+                        <img className={styles.authorPhoto} src={props.authorPhoto}></img>
+                    </div>
                     <div className={styles.commentLikeBox}>
 
                         <div className={styles.commentBox}>

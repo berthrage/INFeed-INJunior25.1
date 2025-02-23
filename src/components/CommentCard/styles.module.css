@@ -17,6 +17,11 @@
     gap: 10px;
 }
 
+.authorPhotoContainer {
+    width: 62px;
+    height: 60px;
+}
+
 .authorPhoto {
     width: 62px;
     height: 60px;
