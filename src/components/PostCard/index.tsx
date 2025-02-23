@@ -4,15 +4,8 @@ import { ptBR } from "date-fns/locale";
 import { useEffect, useRef, useState } from 'react';
 import PrimaryButton from '../PrimaryButton';
 import PrimaryTextArea from '../PrimaryTextArea';
-
-interface PostProperties {
-    id: string;
-    author: string;
-    authorRole: string;
-    authorPhoto: string;
-    content: string;
-    timestamp: string; // ISO string (e.g., "2024-02-22T12:00:00Z")
-}
+import CommentCard from '../CommentCard';
+import { PostProperties } from '../../types/PostProperties';
 
 // Remove "cerca de" no display de tempo
 const customPtBR: Locale = {
@@ -35,7 +28,7 @@ export default function PostCard(props: PostProperties) {
                     setIsVisible(true);
                     observer.disconnect();
                 }
-            }, { threshold: 0.2 }
+            }, { threshold: 0.3 } // Trigger when 30% of the card is visible
             );
     
             if (cardRef.current) {
@@ -59,7 +52,7 @@ export default function PostCard(props: PostProperties) {
                         </div>
                     </div>
                     <div className={styles.timeInfo}>
-                        <p>Publicado há {formatDistanceToNow(parseISO(props.timestamp), { locale: customPtBR, addSuffix: false })}</p>
+                        <p>Publicado há {formatDistanceToNow(parseISO(props.timestamp), { locale: customPtBR })}</p>
                     </div>
                 </div>
 
@@ -72,6 +65,23 @@ export default function PostCard(props: PostProperties) {
                     <PrimaryTextArea id={styles.commentTextArea} placeholder='Escreva um comentário...'></PrimaryTextArea>
                     <PrimaryButton>Comentar</PrimaryButton>
                 </div>
+
+                {props.comments.length > 0 && (
+                    <div className={styles.commentSection}>
+                        {props.comments?.map((comment) => 
+                            <CommentCard 
+                                key={comment.id} 
+                                id={comment.id}
+                                author={comment.author}
+                                authorPhoto={comment.authorPhoto}
+                                content={comment.content}
+                                timestamp={comment.timestamp}
+                                likes={comment.likes}>
+                            </CommentCard>
+                        )}
+                    </div>
+                )}
+                
             </div>
         </>
     )

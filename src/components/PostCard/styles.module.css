@@ -1,6 +1,6 @@
 .card {
-    width: 90%;
-    padding: 40px 40px;
+    width: 100%;
+    padding: 40px 40px 60px 40px;
     background-color: var(--blue1);
     height: auto;
     border-radius: 20px;
@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+    box-sizing: border-box;
 }
 .card.fadeIn {
     opacity: 1;
@@ -74,6 +75,13 @@
 }
 
 #commentTextArea {
-    width: 90%;
+    width: 100%;
     height: 112px;
+}
+
+.commentSection {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    gap: 30px;
 }
