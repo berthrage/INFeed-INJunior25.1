@@ -21,7 +21,7 @@
     --gray3: #cccccc;
     --gray4: #dddddd;
 
-    background: linear-gradient(to bottom, var(--blue3), var(--blue1)) no-repeat;
+    background: linear-gradient(to bottom, var(--blue3), var(--blue2)) no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed;
     height: 100%; 
@@ -32,7 +32,7 @@
   }
 
   html, body {
-    min-height: 100%; /* Ensures the gradient extends to at least the full viewport height */
+    min-height: 100%; 
 }
   
   #root {

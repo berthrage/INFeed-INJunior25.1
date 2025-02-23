@@ -1,13 +1,79 @@
 .card {
-    width: 100%;
+    width: 90%;
+    padding: 40px 40px;
     background-color: var(--blue1);
-    height: 500px;
+    height: auto;
     border-radius: 20px;
     opacity: 0;
     transform: translateY(-150px);
     transition: 0.8s;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 .card.fadeIn {
     opacity: 1;
     transform: translateY(0);
+}
+
+.topSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.authorInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+}
+
+.authorPhoto {
+    width: 73px;
+    height: 73px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--blue4);
+}
+
+.nameRole h1 {
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.nameRole p {
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--gray2);
+}
+
+.timeInfo p {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.contentSection p {
+    font-weight: 400;
+    font-size: 16px;
+    color: #CCCCCC;
+    line-height: 21px;
+    text-align: justify;
+    white-space: pre-wrap;
+}
+
+.commentInputSection {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.commentInputSection label {
+    font-weight: 700;
+}
+
+#commentTextArea {
+    width: 90%;
+    height: 112px;
 }

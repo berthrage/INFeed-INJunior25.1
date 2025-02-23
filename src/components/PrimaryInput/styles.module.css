@@ -1,0 +1,19 @@
+.input {
+    padding: 20px 20px;
+    background-color: #DDDDDD;
+    color: black;
+    font-family: Inter, sans-serif;
+    font-weight: 300;
+    border: none;
+    width: 139px;
+    height: 48px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.5s;
+    resize: none;
+}
+.input::placeholder {
+    color: #444444;
+    font-family: Inter, sans-serif;
+}
