@@ -6,6 +6,8 @@ import PrimaryButton from '../PrimaryButton';
 import PrimaryTextArea from '../PrimaryTextArea';
 import CommentCard from '../CommentCard';
 import { PostProperties } from '../../types/PostProperties';
+import { PostCardContext } from "../../stores/PostCardContext"
+
 
 // Remove "cerca de" no display de tempo
 const customPtBR: Locale = {
@@ -16,9 +18,15 @@ const customPtBR: Locale = {
     },
 };
 
-export default function PostCard(props: PostProperties) {
+export default function PostCard(props: PostProperties & { onDeleteComment: (postId: string, commentId: string) => void }) {
     const [isVisible, setIsVisible] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);
+    const [comments, setComments] = useState(props.comments);
+
+    const handleDeleteComment = (commentId: string) => {
+        setComments((prevComments) => prevComments.filter(comment => comment.id !== commentId));
+        props.onDeleteComment(props.id, commentId); // Notify Feed
+    };
 
     // Observer for Fade-in Effect
     useEffect(() => {
@@ -69,14 +77,15 @@ export default function PostCard(props: PostProperties) {
                 {props.comments.length > 0 && (
                     <div className={styles.commentSection}>
                         {props.comments?.map((comment) => 
-                            <CommentCard 
-                                key={comment.id} 
+                            <CommentCard
+                                key={comment.id}
                                 id={comment.id}
                                 author={comment.author}
                                 authorPhoto={comment.authorPhoto}
                                 content={comment.content}
                                 timestamp={comment.timestamp}
-                                likes={comment.likes}>
+                                likes={comment.likes}
+                                onDelete={handleDeleteComment}>
                             </CommentCard>
                         )}
                     </div>

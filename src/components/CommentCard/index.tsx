@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.css";
 import { formatDistanceToNow, Locale, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -7,6 +7,7 @@ import likeIcon from "../../assets/icons/like-icon.png";
 import likeLikedIcon from "../../assets/icons/like-liked-icon.png"
 import useCounter from "../../hooks/useCounter";
 import { CommentProperties } from "../../types/CommentProperties";
+import { PostCardContext } from "../../stores/PostCardContext";
 
 // Substitui "cerca de" por "Cerca de" no display de tempo
 const customPtBR: Locale = {
@@ -18,11 +19,12 @@ const customPtBR: Locale = {
 };
 
 
-export default function CommentCard(props: CommentProperties) {
+export default function CommentCard(props: CommentProperties & { onDelete: (commentId: string) => void }) {
     const [isVisible, setIsVisible] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);
     const { counter, incrementCounter } = useCounter(props.likes);
     
+
     // Observer for Fade-in Effect
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -59,7 +61,7 @@ export default function CommentCard(props: CommentProperties) {
                                     <p>{formatDistanceToNow(parseISO(props.timestamp), { locale: customPtBR })}</p>
                                 </div>
                                 
-                                <div className={styles.deleteIcon}>
+                                <div className={styles.deleteIcon} onClick={() => props.onDelete(props.id)}>
                                     <img src={trashIcon}></img>
                                 </div>
 
