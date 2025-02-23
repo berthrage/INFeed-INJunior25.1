@@ -38,6 +38,9 @@
     border-radius: 50%;
     border: 5px solid var(--blue4);
 }
+.authorPhoto:hover {
+    transform: scale(1.2);
+}
 
 .nameRole h1 {
     font-weight: 500;
